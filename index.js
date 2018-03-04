@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const db = require('./models')
 
-const port = process.env.PORT || 5432
+const port = process.env.PORT || 4001
 
 const app = express()
   .use(cors())
@@ -20,6 +20,11 @@ app.use(function(req, res, next) {
 
 app.use(bodyParser.json())
 console.log(new Date())
+
+app.listen(4001, () => {
+  console.log("Express API listening on port 4001")
+})
+
 
 // The GET method requests a representation of the specified resource.
 // Requests using GET should only retrieve data and should have no other effect.
@@ -145,12 +150,4 @@ app.patch('/events/:id', (req, res) => {
       res.status(500)
       res.json({ message: 'Oops! There was an error getting the event. Please try again' })
     })
-})
-
-app.listen(port, () => {
-  console.log(`
-Server is listening on ${port}.
-Open http://localhost:${port}
-to see the app in your browser.
-    `)
 })
